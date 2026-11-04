@@ -569,19 +569,15 @@ async function lightPalace() {
     hero.classList.add('lit');
     bodyTag.classList.remove('locked');
 
-    // Safe video play handler
-    if (video && video.style.display !== 'none') {
+    // Video play command
+    const video = document.getElementById('lightingVideo');
+    if (video) {
       try {
-        video.muted = true;
         video.currentTime = 0;
-        let playPromise = video.play();
-        if (playPromise !== undefined) {
-          playPromise.catch(error => {
-            console.log('Autoplay restricted or video missing, using CSS glow fallback:', error);
-          });
-        }
+        video.muted = true; // Mobile browsers ke liye video ka mute hona zaroori hai
+        await video.play();
       } catch (error) {
-        console.log('Video element error caught safely');
+        console.log("Video play error:", error);
       }
     }
 
@@ -592,10 +588,10 @@ async function lightPalace() {
       console.warn('Audio play restricted:', e);
     }
 
-    // Auto-scroll after lighting effect finishes (~5 seconds)
+    // Auto-scroll down after video starts playing
     setTimeout(() => {
-      $('date').scrollIntoView({ behavior: 'smooth' });
-    }, 5000);
+      document.getElementById('date').scrollIntoView({ behavior: 'smooth' });
+    }, 5500);
   }
 
   function replayAnimation(event) {
