@@ -101,7 +101,7 @@ button, a{font:inherit}a{color:inherit}
 .hero-text-overlay {
   position: absolute;
   z-index: 5;
-  top: 38%;
+  top: 48%;
   left: 50%;
   transform: translate(-50%, -50%);
   width: 90%;
@@ -319,6 +319,24 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
 }
 @media(min-width:700px){section.content{padding:95px 30px}.event-art{height:250px}.photo img{height:430px}.location-image-wrap{height:340px}}
 @media(max-width:430px){body{font-size:18px}.scratch-card{height:122px}.scratch-card strong{font-size:26px}.scratch-card strong.month{font-size:16px}.event{gap:12px}.event-art{height:155px}.event h3{font-size:28px}.event-time{font-size:25px}.event-date{font-size:9px}.photo img{height:340px}.location-image-wrap{height:220px}}
+@media(max-width:430px){
+  body{font-size:18px}
+  .scratch-card{height:122px}
+  .scratch-card strong{font-size:26px}
+  .scratch-card strong.month{font-size:16px}
+  .event{gap:12px}
+  .event-art{height:155px}
+  .event-h3{font-size:28px}
+  .event-time{font-size:25px}
+  .event-date{font-size:9px}
+  .photo img{height:340px}
+  .location-image-wrap{height:220px}
+
+  /* Yahan Niche Add Karein */
+  .hero-text-overlay {
+    top: 50% !important; 
+  }
+}
 </style>
 </head>
 <body class="locked" id="bodyTag">
@@ -514,7 +532,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const $ = id => document.getElementById(id);
   const bodyTag = $('bodyTag');
   const hero = $('top');
-  const video = $('lightingVideo');
+  const video = $('lightingVheroideo');
   const lightButton = $('lightButton');
   const replayButton = $('replayButton');
   const audio = $('music');
