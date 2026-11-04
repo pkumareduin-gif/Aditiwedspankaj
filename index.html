@@ -9,6 +9,19 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <style>
+  .event-art {
+  overflow: hidden; /* Dabbhe se bahar image nahi jayegi */
+  position: relative;
+}
+
+.event-art .event-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Image kharab nahi hogi, automatic fit hogi */
+  object-position: center;
+  display: block;
+}
+  
 :root{--bg:#100c13;--panel:#17121b;--gold:#dfbd79;--gold2:#a98249;--cream:#f0e7d9;--muted:#bdb1a1}
 *{box-sizing:border-box}
 
@@ -416,7 +429,7 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
   <div class="ornament">❧ ✧ ❧</div>
   <div class="event-list">
     <article class="event">
-      <div class="event-art"><img src="assets/haldi.jpg" alt="Haldi" style="width:25%; height:25%; object-fit:cover; border-radius:50%;"></div></div>
+      <div class="event-art"><img src="assets/haldi.jpg" alt="Haldi" class="event-img"></div></div>
       <div class="event-info">
         <p class="event-date" data-en="TUESDAY · 24 NOVEMBER" data-hi="मंगलवार · 24 नवंबर">TUESDAY · 24 NOVEMBER</p>
         <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time to be announced</p>
@@ -426,7 +439,7 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
       </div>
     </article>
     <article class="event">
-      <div class="event-art"><img src="assets/Mehndi.jpg" alt="Haldi" style="width:25%; height:25%; object-fit:cover; border-radius:50%;"></div>
+      <div class="event-art"><img src="assets/Mehndi.jpg" alt="Mehndi" class="event-img"></div>
       <div class="event-info">
         <p class="event-date" data-en="TUESDAY · 24 NOVEMBER" data-hi="मंगलवार · 24 नवंबर">TUESDAY · 24 NOVEMBER</p>
         <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time to be announced</p>
@@ -436,7 +449,7 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
       </div>
     </article>
     <article class="event">
-      <div class="event-art"><img src="assets/Wedding.jpg" alt="Haldi" style="width:25%; height:25%; object-fit:cover; border-radius:50%;"></div>
+      <div class="event-art"><img src="assets/Wedding.jpg" alt="Wedding" class="event-img"></div>
       <div class="event-info">
         <p class="event-date" data-en="WEDNESDAY · 25 NOVEMBER" data-hi="बुधवार · 25 नवंबर">WEDNESDAY · 25 NOVEMBER</p>
         <p class="event-time" data-en="Pheras Muhurat · 5:00 AM" data-hi="फेरे शुभ मुहूर्त · प्रात: 5:00 बजे">Pheras Muhurat · 5:00 AM</p>
@@ -446,7 +459,7 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
       </div>
     </article>
     <article class="event">
-      <div class="event-art"><img src="assets/Vidaai.jpg" alt="Haldi" style="width:25%; height:25%; object-fit:cover; border-radius:50%;"></div>
+      <div class="event-art"><img src="assets/Vidaai.jpg" alt="Vidaai" class="event-img"></div>
       <div class="event-info">
         <p class="event-date" data-en="THURSDAY · 26 NOVEMBER" data-hi="गुरुवार · 26 नवंबर">THURSDAY · 26 NOVEMBER</p>
         <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time to be announced</p>
