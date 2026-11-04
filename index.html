@@ -395,6 +395,12 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
     <div class="scratch-card"><strong class="month" data-en="November" data-hi="नवंबर">November</strong><small data-en="MONTH" data-hi="महीना">MONTH</small><canvas aria-label="Scratch to reveal month"></canvas></div>
     <div class="scratch-card"><strong>2026</strong><small data-en="YEAR" data-hi="वर्ष">YEAR</small><canvas aria-label="Scratch to reveal year"></canvas></div>
   </div>
+  <!-- Scratch section ke andar date paragraph ke niche yeh button add karein -->
+<div style="margin-top: 25px;">
+  <button id="addToCalendarBtn" type="button" style="background: linear-gradient(135deg, #dfbd79, #a98249); color: #100c13; border: none; padding: 12px 28px; border-radius: 30px; font-family: 'Playfair Display', serif; font-size: 14px; letter-spacing: 0.15em; text-transform: uppercase; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.3); transition: all 0.3s ease;">
+    📅 Save Wedding Date
+  </button>
+</div>
   <p style="font-size:24px;margin-top:42px" data-en="Wednesday · 25 November 2026" data-hi="बुधवार · 25 नवंबर 2026">Wednesday · 25 November 2026</p>
   <p style="color:var(--muted);font-style:italic" data-en="A day made beautiful by your presence." data-hi="आपकी उपस्थिति इस दिन को सुंदर बनाएगी।">A day made beautiful by your presence.</p>
 </section>
@@ -694,6 +700,42 @@ async function lightPalace() {
   }
   tick(); 
   window.setInterval(tick, 1000);
+});
+  // Save to Calendar Functionality
+document.addEventListener("DOMContentLoaded", () => {
+  const calendarBtn = document.getElementById('addToCalendarBtn');
+  if (calendarBtn) {
+    calendarBtn.addEventListener('click', () => {
+      const title = "Pankaj Weds Aditi - Royal Wedding";
+      const description = "Piyush Marriage Garden, Gwalior me vivah aur manglik utsav mein aapka swagat hai.";
+      const location = "Piyush Marriage Garden, Gwalior, Madhya Pradesh, India";
+      
+      // Wedding Date & Time: 25 Nov 2026, 05:00 AM IST
+      const startTime = "20261125T050000Z";
+      const endTime = "20261125T230000Z";
+
+      // ICS Calendar file content
+      const icsContent = 
+        "BEGIN:VCALENDAR\n" +
+        "VERSION:2.0\n" +
+        "BEGIN:VEVENT\n" +
+        "SUMMARY:" + title + "\n" +
+        "DESCRIPTION:" + description + "\n" +
+        "LOCATION:" + location + "\n" +
+        "DTSTART:" + startTime + "\n" +
+        "DTEND:" + endTime + "\n" +
+        "END:VEVENT\n" +
+        "END:VCALENDAR";
+
+      const blob = new Blob([icsContent], { type: 'text/calendar;charset=utf-8' });
+      const link = document.createElement('a');
+      link.href = window.URL.createObjectURL(blob);
+      link.setAttribute('download', 'Pankaj-Weds-Aditi-Wedding.ics');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+  }
 });
 </script>
 </body>
