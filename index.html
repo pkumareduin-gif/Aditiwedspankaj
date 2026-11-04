@@ -344,6 +344,56 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
     top: 50% !important; 
   }
 }
+  /* Save the Date Button Pulse & Glow Animation */
+#addToCalendarBtn {
+  animation: royalPulse 2s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Continuous Light Sweep Effect */
+#addToCalendarBtn::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 70%
+  );
+  transform: rotate(30deg);
+  animation: shineSweep 3s infinite;
+}
+
+/* Keyframes for Gentle Scaling and Glowing Shadow */
+@keyframes royalPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(223, 189, 121, 0.4);
+  }
+  50% {
+    transform: scale(1.06); /* Halka sa bada hoga */
+    box-shadow: 0 6px 25px rgba(223, 189, 121, 0.8), 0 0 12px rgba(255, 255, 255, 0.5); /* Glow badhega */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 4px 15px rgba(223, 189, 121, 0.4);
+  }
+}
+
+/* Keyframes for Light Shine Passing Through */
+@keyframes shineSweep {
+  0% {
+    left: -100%;
+  }
+  20%, 100% {
+    left: 100%;
+  }
+}
 </style>
 </head>
 <body class="locked" id="bodyTag">
@@ -464,7 +514,7 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
       <div class="event-art"><img src="assets/lagan.jpg" alt="haldi" class="event-img"></div>
       <div class="event-info">
         <p class="event-date" data-en="MONDAY · 23 NOVEMBER" data-hi="सोमवार · 23 नवंबर">MONDAY · 23 NOVEMBER</p>
-        <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time to be announced</p>
+        <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time: 4:00PM ONWARDS</p>
         <h3 data-en="Lagan Tika" data-hi="लगन टीका">Lagan Tika</h3>
         <p class="hindi">लगन टीका</p>
         <p class="event-place" data-en="Venue Name / Location" data-hi="विवाह स्थल / पता">Venue Name: Shitole Marriage Garden, Adityapuram Gwalior</p>
