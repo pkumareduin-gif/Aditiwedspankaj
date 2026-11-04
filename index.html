@@ -839,6 +839,31 @@ a[href*="maps.google.com"]::after {
   from { opacity: 0; transform: translateY(10px); }
   to { opacity: 1; transform: translateY(0); }
 }
+  /* Event Dates aur Timings ko Bold, Clear aur Royal banane ke liye */
+.event-date, 
+.event-time, 
+.event-place {
+  font-family: 'Playfair Display', serif !important; /* Premium serif font */
+  font-weight: 700 !important; /* Font ko mota karega */
+  font-size: 16px !important; /* Size thoda bada karega */
+  letter-spacing: 0.12em !important; /* Aksharon ke beech ki doori saaf dikhegi */
+  color: var(--gold) !important; /* Sunehri chamak (Golden color) */
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.8); /* Background par highlight karne ke liye shadow */
+}
+
+/* Agar specific event date hai toh uske liye */
+article.event .event-date {
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: var(--cream) !important;
+  background: rgba(223, 189, 121, 0.1);
+  padding: 4px 10px;
+  border-radius: 4px;
+  display: inline-block;
+  margin-bottom: 8px;
+  border: 1px solid rgba(223, 189, 121, 0.3);
+}
+  
 </style>
 </head>
 <body class="locked" id="bodyTag">
