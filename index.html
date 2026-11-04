@@ -394,6 +394,112 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
     left: 100%;
   }
 }
+  /* VIEW ON MAP Button Royal Pulse & Glow Animation */
+.map-btn, a[href*="google.com/maps"] {
+  animation: mapPulse 2.2s infinite ease-in-out;
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+}
+
+/* Light Sweep Effect on Map Button */
+.map-btn::after, a[href*="google.com/maps"]::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.35) 50%,
+    transparent 70%
+  );
+  transform: rotate(30deg);
+  animation: mapShine 3.5s infinite;
+}
+
+/* Keyframes for Gentle Scaling and Glowing Shadow */
+@keyframes mapPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(223, 189, 121, 0.3);
+  }
+  50% {
+    transform: scale(1.05); /* Halka sa bada hoga */
+    box-shadow: 0 0 20px rgba(223, 189, 121, 0.7), 0 0 8px rgba(255, 255, 255, 0.4); /* Glow chamkega */
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(223, 189, 121, 0.3);
+  }
+}
+
+/* Keyframes for Light Shine Passing Through */
+@keyframes mapShine {
+  0% {
+    left: -100%;
+  }
+  25%, 100% {
+    left: 100%;
+  }
+}
+  /* Sabhi Google Maps buttons ke liye Royal Pulse & Glow Animation */
+.map-btn, 
+a[href*="google.com/maps"], 
+a[href*="maps.google.com"] {
+  animation: mapPulse 2.2s infinite ease-in-out !important;
+  position: relative !important;
+  overflow: hidden !important;
+  display: inline-block !important;
+}
+
+/* Map button ke upar se shiny light pass hone ka effect */
+.map-btn::after, 
+a[href*="google.com/maps"]::after, 
+a[href*="maps.google.com"]::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    60deg,
+    transparent 30%,
+    rgba(255, 255, 255, 0.4) 50%,
+    transparent 70%
+  );
+  transform: rotate(30deg);
+  animation: mapShine 3.5s infinite;
+}
+
+/* Scaling aur glowing light ki keyframes */
+@keyframes mapPulse {
+  0% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(223, 189, 121, 0.3);
+  }
+  50% {
+    transform: scale(1.06); /* Halka sa zoom hokar glow karega */
+    box-shadow: 0 0 22px rgba(223, 189, 121, 0.8), 0 0 10px rgba(255, 255, 255, 0.5);
+  }
+  100% {
+    transform: scale(1);
+    box-shadow: 0 0 10px rgba(223, 189, 121, 0.3);
+  }
+}
+
+/* Light shine movement keyframes */
+@keyframes mapShine {
+  0% {
+    left: -100%;
+  }
+  25%, 100% {
+    left: 100%;
+  }
+}
 </style>
 </head>
 <body class="locked" id="bodyTag">
