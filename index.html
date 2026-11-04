@@ -500,6 +500,65 @@ a[href*="maps.google.com"]::after {
     left: 100%;
   }
 }
+  /* Family & Hosts Section Styling */
+.family-section {
+  padding: 60px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, #100c13, #17121b, #100c13);
+  border-top: 1px solid rgba(223, 189, 121, 0.2);
+  border-bottom: 1px solid rgba(223, 189, 121, 0.2);
+  margin: 40px 0;
+}
+
+.family-section .section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 36px);
+  color: var(--gold);
+  margin-bottom: 5px;
+  letter-spacing: 0.08em;
+}
+
+.family-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+  max-width: 900px;
+  margin: 30px auto 0 auto;
+}
+
+.family-card {
+  background: rgba(23, 18, 27, 0.9);
+  border: 1px solid var(--gold2);
+  border-radius: 12px;
+  padding: 22px 25px;
+  flex: 1 1 260px;
+  max-width: 320px;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.5);
+  transition: transform 0.3s ease;
+}
+
+.family-card:hover {
+  transform: translateY(-5px);
+  border-color: var(--gold);
+}
+
+.family-card h4 {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  font-size: 18px;
+  margin-bottom: 10px;
+  letter-spacing: 0.05em;
+  border-bottom: 1px dashed rgba(223, 189, 121, 0.3);
+  padding-bottom: 6px;
+}
+
+.family-card p {
+  color: var(--cream);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 0;
+}
 </style>
 </head>
 <body class="locked" id="bodyTag">
@@ -667,6 +726,32 @@ a[href*="maps.google.com"]::after {
         <p class="event-place" data-en="With love and blessings" data-hi="स्नेह और आशीर्वाद के साथ">With love and blessings</p>
       </div>
     </article>
+  </div>
+</section>
+  <!-- Family & Hosts Section -->
+<section class="family-section">
+  <div class="ornament">❖ ⚜ ❖</div>
+  <h2 class="section-title" data-en="Cordially Invited By" data-hi="विनीत / आत्मीय आंत्रक">Cordially Invited By</h2>
+  <p class="hindi" style="color: var(--gold); margin-bottom: 25px; font-size: 18px;">विनीत / आत्मीय आंत्रक</p>
+
+  <div class="family-grid">
+    <!-- Card 1: Aashirwad -->
+    <div class="family-card">
+      <h4 data-en="In Gracious Presence" data-hi="शुभ आशीर्वाद">In Gracious Presence</h4>
+      <p>Late Shri Sitaram Ji Sharma<br>& Late Smt. Kamla Devi</p>
+    </div>
+
+    <!-- Card 2: Host Family -->
+    <div class="family-card">
+      <h4 data-en="Host Family" data-hi="स्वागतकर्ता">Host Family</h4>
+      <p>Shri Rakesh Sharma & Smt. Sunita Sharma<br><span style="font-size: 14px; color: var(--muted);">(Parents)</span></p>
+    </div>
+
+    <!-- Card 3: Awaiting Presence -->
+    <div class="family-card">
+      <h4 data-en="Eagerly Awaiting" data-hi="आगामी आकांक्षी">Eagerly Awaiting</h4>
+      <p>Piyush, Ankit, Rahul & Entire Sharma Family<br><span style="font-size: 14px; color: var(--muted);">(Brothers & Relatives)</span></p>
+    </div>
   </div>
 </section>
 
