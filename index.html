@@ -564,38 +564,39 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   });
+async function lightPalace() {
+    if (hero.classList.contains('lit')) return;
+    hero.classList.add('lit');
+    bodyTag.classList.remove('locked');
 
-  async function lightPalace() {
-  if (hero.classList.contains('lit')) return;
-  hero.classList.add('lit');
-  bodyTag.classList.remove('locked');
-
-  if (video) {
-    try {
-      video.muted = true; // Force mute taaki browser play block na kare
-      video.currentTime = 0;
-      let playPromise = video.play();
-      if (playPromise !== undefined) {
-        playPromise.catch(error => {
-          console.warn('Video play prevented by browser:', error);
-        });
+    // Safe video play handler
+    if (video && video.style.display !== 'none') {
+      try {
+        video.muted = true;
+        video.currentTime = 0;
+        let playPromise = video.play();
+        if (playPromise !== undefined) {
+          playPromise.catch(error => {
+            console.log('Autoplay restricted or video missing, using CSS glow fallback:', error);
+          });
+        }
+      } catch (error) {
+        console.log('Video element error caught safely');
       }
-    } catch (error) {
-      console.warn('Video play error:', error);
     }
-  }
 
-  try {
-    await audio.play();
-    musicBtn.textContent = 'Ⅱ';
-  } catch (e) {
-    console.warn('Audio play restricted:', e);
-  }
+    try {
+      await audio.play();
+      musicBtn.textContent = 'Ⅱ';
+    } catch (e) {
+      console.warn('Audio play restricted:', e);
+    }
 
-  setTimeout(() => {
-    $('date').scrollIntoView({ behavior: 'smooth' });
-  }, 5500);
-}
+    // Auto-scroll after lighting effect finishes (~5 seconds)
+    setTimeout(() => {
+      $('date').scrollIntoView({ behavior: 'smooth' });
+    }, 5000);
+  }
 
   function replayAnimation(event) {
     if(event) event.stopPropagation();
