@@ -71,8 +71,15 @@ button, a{font:inherit}a{color:inherit}
 }
 
 /* Palace First Screen Styles */
-.hero{min-height:100vh;min-height:100svh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#05080d;isolation:isolate;width:100%}
+.hero{min-height:100vh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#05080d;isolation:isolate;width:100%}
 .scene-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;user-select:none;-webkit-user-drag:none}
+  @media(min-width: 768px) {
+  .hero {
+    max-width: 500px; /* Ya aap 450px bhi rakh sakte hain */
+    margin: 0 auto;   /* Center align kar dega */
+    box-shadow: 0 0 50px rgba(0, 0, 0, 0.8); /* Beautiful side shadow effect */
+  }
+}
 .dark-image{z-index:1}
 .lighting-video{z-index:2;opacity:0;transition:opacity 4.5s cubic-bezier(.2,.65,.25,1);pointer-events:none}
 .hero.lit .lighting-video{opacity:1}
