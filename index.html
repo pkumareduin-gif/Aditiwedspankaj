@@ -709,6 +709,136 @@ a[href*="maps.google.com"]::after {
   0% { transform: scale(0.8); opacity: 0; }
   100% { transform: scale(1); opacity: 1; }
 }
+  /* Royal Wishes Wall & Blessings Styling */
+.wishes-section {
+  padding: 65px 20px;
+  text-align: center;
+  background: linear-gradient(to bottom, #100c13, #17121b, #100c13);
+  border-top: 1px solid rgba(223, 189, 121, 0.25);
+  border-bottom: 1px solid rgba(223, 189, 121, 0.25);
+  margin: 40px 0;
+}
+
+.wishes-section .section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(26px, 5vw, 36px);
+  color: var(--gold);
+  margin-bottom: 5px;
+  letter-spacing: 0.08em;
+}
+
+.wishes-container {
+  max-width: 650px;
+  margin: 30px auto 0 auto;
+}
+
+/* Input Form Box */
+.wishes-input-box {
+  background: rgba(23, 18, 27, 0.95);
+  border: 2px solid var(--gold2);
+  border-radius: 16px;
+  padding: 30px 25px;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.7);
+  text-align: left;
+  margin-bottom: 35px;
+}
+
+.wish-group {
+  margin-bottom: 18px;
+}
+
+.wish-group label {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  font-size: 15px;
+  margin-bottom: 6px;
+  letter-spacing: 0.05em;
+}
+
+.wish-group input, 
+.wish-group textarea {
+  width: 100%;
+  padding: 12px 15px;
+  background: rgba(16, 12, 19, 0.9);
+  border: 1px solid rgba(223, 189, 121, 0.4);
+  border-radius: 8px;
+  color: var(--cream);
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 17px;
+  outline: none;
+  transition: border-color 0.3s;
+}
+
+.wish-group input:focus, 
+.wish-group textarea:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 10px rgba(223, 189, 121, 0.2);
+}
+
+.wish-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, #dfbd79, #a98249);
+  color: #100c13;
+  border: none;
+  padding: 14px;
+  border-radius: 30px;
+  font-family: 'Playfair Display', serif;
+  font-size: 15px;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(223, 189, 121, 0.4);
+}
+
+.wish-submit-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(223, 189, 121, 0.7);
+}
+
+/* Wall of Wishes Display Scroll Grid */
+.wishes-wall-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  max-height: 400px;
+  overflow-y: auto;
+  padding-right: 5px;
+}
+
+.wish-scroll-card {
+  background: rgba(23, 18, 27, 0.85);
+  border: 1px solid var(--gold2);
+  border-left: 4px solid var(--gold);
+  border-radius: 10px;
+  padding: 18px 22px;
+  text-align: left;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+  animation: fadeInWish 0.5s ease;
+}
+
+.wish-author {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  font-size: 16px;
+  margin-bottom: 6px;
+  font-weight: 600;
+}
+
+.wish-text {
+  color: var(--cream);
+  font-size: 16px;
+  line-height: 1.5;
+  font-style: italic;
+  margin: 0;
+}
+
+@keyframes fadeInWish {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 </style>
 </head>
 <body class="locked" id="bodyTag">
@@ -975,6 +1105,46 @@ a[href*="maps.google.com"]::after {
     <img id="lightboxImg" src="" alt="Enlarged View">
   </div>
 </div>
+  <!-- Royal Wishes Wall Section -->
+<section class="wishes-section">
+  <div class="ornament">❖ ⚜ ❖</div>
+  <h2 class="section-title" data-en="The Royal Blessings Wall" data-hi="शुभ आशीर्वाद पट्ट">The Royal Blessings Wall</h2>
+  <p class="hindi" style="color: var(--gold); margin-bottom: 25px; font-size: 18px;">दंपति के लिए अपने शुभकामना संदेश लिखें</p>
+
+  <div class="wishes-container">
+    
+    <!-- Input Form -->
+    <div class="wishes-input-box">
+      <form id="royalWishForm" onsubmit="handleNewWish(event)">
+        <div class="wish-group">
+          <label for="wishName">Your Name / आपका नाम *</label>
+          <input type="text" id="wishName" required placeholder="e.g. Ankit Sharma">
+        </div>
+
+        <div class="wish-group">
+          <label for="wishMessage">Your Blessings / आपकी शुभकामनाएँ *</label>
+          <textarea id="wishMessage" rows="3" required placeholder="Pankaj aur Aditi ko dher saari badhaiyan..."></textarea>
+        </div>
+
+        <button type="submit" class="wish-submit-btn">Send Blessing ✨</button>
+      </form>
+    </div>
+
+    <!-- Live Display Wall of Wishes -->
+    <div id="wishesWallGrid" class="wishes-wall-grid">
+      <!-- Default Pre-loaded Royal Wish Example -->
+      <div class="wish-scroll-card">
+        <div class="wish-author">👑 Shanti & Family</div>
+        <p class="wish-text">"Pankaj aur Aditi ko aane wale naye jeevan ke liye dher saara pyaar aur anant shubhkaamnaayein!"</p>
+      </div>
+      <div class="wish-scroll-card">
+        <div class="wish-author">⚜️ Rohit Verma</div>
+        <p class="wish-text">"Aap dono ki jodi sada salamat rahe. Gwalior ki is grand royal shadi ki bahut-bahut badhai!"</p>
+      </div>
+    </div>
+
+  </div>
+</section>
 
 <footer class="footer">
   <p style="color:var(--gold)">॥ श्री गणेशाय नमः ॥</p>
@@ -1193,6 +1363,46 @@ function closeLightbox() {
   const lightbox = document.getElementById('royalLightbox');
   lightbox.classList.remove('active');
   document.body.classList.remove('locked');
+}
+  // Royal Wishes Wall Script
+function handleNewWish(event) {
+  event.preventDefault();
+
+  const nameInput = document.getElementById('wishName');
+  const msgInput = document.getElementById('wishMessage');
+  const wallGrid = document.getElementById('wishesWallGrid');
+
+  const name = nameInput.value.trim();
+  const message = msgInput.value.trim();
+
+  if (!name || !message) return;
+
+  // Naya scroll card banana
+  const newCard = document.createElement('div');
+  newCard.className = 'wish-scroll-card';
+  newCard.innerHTML = `
+    <div class="wish-author">⚜️ ${escapeHtml(name)}</div>
+    <p class="wish-text">"${escapeHtml(message)}"</p>
+  `;
+
+  // Wall par sabse upar add karna
+  wallGrid.prepend(newCard);
+
+  // Form clear karna
+  nameInput.value = '';
+  msgInput.value = '';
+}
+
+// Security helper function
+function escapeHtml(text) {
+  const map = {
+    '&': '&amp;',
+    '<': '&lt;',
+    '>': '&gt;',
+    '"': '&quot;',
+    "'": '&#039;'
+  };
+  return text.replace(/[&<>"']/g, function(m) { return map[m]; });
 }
 </script>
 </body>
