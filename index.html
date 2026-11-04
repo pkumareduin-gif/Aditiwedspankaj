@@ -358,7 +358,7 @@ section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;
 <header class="hero" id="top" aria-label="Click the diya to illuminate the palace">
   <!-- Image & Video Elements (If present in project directory) -->
   <img class="scene-bg dark-image" id="palaceImg" src="palace-dark.jpg" alt="Unlit dark palace" onerror="this.style.display='none'">
-  <video class="scene-bg lighting-video" id="lightingVideo" src="palace-lighting.mp4" muted playsinline loop preload="auto" disablepictureinpicture onerror="this.style.display='none'"></video>
+  <video class="scene-bg lighting-video" id="lightingVideo" src="palace-lighting.mp4" muted playsinline loop preload="auto" disablepictureinpicture></video>
   
   
   <div class="warmth"></div>
@@ -566,31 +566,36 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   async function lightPalace() {
-    if (hero.classList.contains('lit')) return;
-    hero.classList.add('lit');
-    bodyTag.classList.remove('locked');
+  if (hero.classList.contains('lit')) return;
+  hero.classList.add('lit');
+  bodyTag.classList.remove('locked');
 
-    if (video && video.style.display !== 'none') {
-      try {
-        video.currentTime = 0;
-        await video.play();
-      } catch (error) {
-        console.warn('Video play note:', error);
-      }
-    }
-
+  if (video) {
     try {
-      await audio.play();
-      musicBtn.textContent = 'Ⅱ';
-    } catch (e) {
-      console.warn('Audio autoplay restricted:', e);
+      video.muted = true; // Force mute taaki browser play block na kare
+      video.currentTime = 0;
+      let playPromise = video.play();
+      if (playPromise !== undefined) {
+        playPromise.catch(error => {
+          console.warn('Video play prevented by browser:', error);
+        });
+      }
+    } catch (error) {
+      console.warn('Video play error:', error);
     }
-
-    // Auto-scroll after lighting transition and text animation complete (~5.5 seconds)
-    setTimeout(() => {
-      $('date').scrollIntoView({ behavior: 'smooth' });
-    }, 5500);
   }
+
+  try {
+    await audio.play();
+    musicBtn.textContent = 'Ⅱ';
+  } catch (e) {
+    console.warn('Audio play restricted:', e);
+  }
+
+  setTimeout(() => {
+    $('date').scrollIntoView({ behavior: 'smooth' });
+  }, 5500);
+}
 
   function replayAnimation(event) {
     if(event) event.stopPropagation();
