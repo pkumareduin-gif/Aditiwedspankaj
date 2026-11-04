@@ -1,0 +1,660 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#100c13">
+<title>Pankaj Weds Aditi | Royal Wedding Invitation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#100c13;--panel:#17121b;--gold:#dfbd79;--gold2:#a98249;--cream:#f0e7d9;--muted:#bdb1a1}
+*{box-sizing:border-box}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: var(--bg);
+  color: var(--cream);
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: 20px;
+  line-height: 1.45;
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body.locked {
+  height: 100vh;
+  height: 100svh;
+  overflow: hidden;
+}
+
+button, a{font:inherit}a{color:inherit}
+.script{font-family:"Great Vibes",cursive;color:var(--gold);font-weight:400}.caps{letter-spacing:.25em;text-transform:uppercase;font-size:11px}.ornament{color:var(--gold);letter-spacing:.18em;font-size:23px;margin:16px 0}
+
+/* Language Switcher Top Left */
+.lang-toggle {
+  position: fixed;
+  top: 18px;
+  left: 18px;
+  z-index: 100;
+  background: rgba(23, 18, 27, 0.85);
+  border: 1px solid var(--gold);
+  color: var(--gold);
+  padding: 8px 18px;
+  border-radius: 30px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  backdrop-filter: blur(8px);
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+}
+.lang-toggle:hover {
+  background: var(--gold);
+  color: #100c13;
+}
+
+/* Palace First Screen Styles */
+.hero{min-height:100vh;min-height:100svh;position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;overflow:hidden;background:#05080d;isolation:isolate;width:100%}
+.scene-bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;user-select:none;-webkit-user-drag:none}
+.dark-image{z-index:1}
+.lighting-video{z-index:2;opacity:0;transition:opacity 4.5s cubic-bezier(.2,.65,.25,1);pointer-events:none}
+.hero.lit .lighting-video{opacity:1}
+
+/* Decorative Royal Arch Canvas (SVG Fallback when image/video file is missing) */
+.palace-svg-fallback {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+}
+.palace-svg-fallback .lit-element {
+  opacity: 0;
+  transition: opacity 4.5s ease;
+}
+.hero.lit .palace-svg-fallback .lit-element {
+  opacity: 1;
+}
+
+.warmth{position:absolute;z-index:3;inset:0;opacity:0;pointer-events:none;background:radial-gradient(ellipse at 50% 72%,rgba(255,158,55,.18),transparent 62%);mix-blend-mode:screen;transition:opacity 4.5s ease}
+.hero.lit .warmth{opacity:1}
+
+/* Overlay Text Animation inside Palace Frame */
+.hero-text-overlay {
+  position: absolute;
+  z-index: 5;
+  top: 38%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 480px;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 1.2s ease 2.5s;
+}
+
+.hero.lit .hero-text-overlay {
+  opacity: 1;
+}
+
+.hero-text-overlay .welcome-sub {
+  font-size: 18px;
+  letter-spacing: 0.15em;
+  color: var(--cream);
+  margin-bottom: 8px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 1s ease 3s;
+}
+
+.hero-text-overlay .couple-title {
+  font-family: "Great Vibes", cursive;
+  font-size: clamp(40px, 9vw, 62px);
+  color: var(--gold);
+  margin: 2px 0;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 1s ease 3.4s;
+  text-shadow: 0 2px 12px rgba(0,0,0,0.9);
+}
+
+.hero-text-overlay .ampersand {
+  font-size: 24px;
+  color: var(--gold);
+  margin: 2px 0;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 1s ease 3.7s;
+}
+
+.hero-text-overlay .dec-divider {
+  width: 140px;
+  margin: 10px auto;
+  opacity: 0;
+  transform: scaleX(0);
+  transition: all 1s ease 4s;
+}
+
+.hero-text-overlay .hero-date-loc {
+  font-size: 13px;
+  letter-spacing: 0.25em;
+  color: var(--cream);
+  text-transform: uppercase;
+  margin-top: 8px;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: all 1s ease 4.3s;
+}
+
+.hero.lit .hero-text-overlay .welcome-sub,
+.hero.lit .hero-text-overlay .couple-title,
+.hero.lit .hero-text-overlay .ampersand,
+.hero.lit .hero-text-overlay .hero-date-loc {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.hero.lit .hero-text-overlay .dec-divider {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* Stylish Diya Light Button */
+.tap-btn-container {
+  position: absolute;
+  z-index: 6;
+  left: 50%;
+  top: 78%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 90%;
+  max-width: 320px;
+}
+
+.tap-button {
+  background: linear-gradient(135deg, rgba(223,189,121,0.3) 0%, rgba(169,130,73,0.55) 50%, rgba(40,27,19,0.85) 100%);
+  border: 1px solid rgba(223, 189, 121, 0.8);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.6), inset 0 1px 2px rgba(255, 240, 200, 0.5), 0 0 25px rgba(223, 189, 121, 0.3);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  color: #fff4db;
+  padding: 15px 30px;
+  border-radius: 50px;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  animation: pulseGlow 3s infinite alternate;
+}
+
+.tap-button:hover, .tap-button:active {
+  transform: translateY(-2px) scale(1.02);
+  border-color: #f0dda9;
+  background: linear-gradient(135deg, rgba(223,189,121,0.5) 0%, rgba(169,130,73,0.7) 50%, rgba(55,35,22,0.9) 100%);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.7), inset 0 1px 2px rgba(255, 255, 255, 0.7), 0 0 35px rgba(223, 189, 121, 0.5);
+}
+
+.tap-button .diya-icon {
+  font-size: 18px;
+  color: var(--gold);
+}
+
+@keyframes pulseGlow {
+  0% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 12px rgba(223, 189, 121, 0.2); }
+  100% { box-shadow: 0 8px 32px rgba(0, 0, 0, 0.5), 0 0 28px rgba(223, 189, 121, 0.6); }
+}
+
+.hero.lit .tap-btn-container {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.8s ease;
+}
+
+.replay {
+  position: absolute;
+  z-index: 7;
+  right: 18px;
+  top: 18px;
+  padding: 8px 16px;
+  border: 1px solid rgba(255,220,165,.4);
+  border-radius: 30px;
+  background: rgba(16, 12, 19, 0.65);
+  backdrop-filter: blur(6px);
+  color: #ffe0ad;
+  font: 12px "Cormorant Garamond", serif;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  cursor: pointer;
+  opacity: 0;
+  transition: all 0.4s ease;
+}
+.replay:hover {
+  background: rgba(223,189,121,0.25);
+  border-color: var(--gold);
+}
+.hero.lit .replay { opacity: 1; }
+
+/* Wedding Details Sections */
+section.content{position:relative;text-align:center;padding:78px 18px;background:radial-gradient(ellipse at 50% 0,#25202a,#100c13 70%);overflow:hidden}
+section.content:before{content:"";position:absolute;inset:0;background-image:radial-gradient(#fff2 .7px,transparent .8px);background-size:5px 5px;opacity:.2;pointer-events:none}
+section.content>*{position:relative}.kicker{font-size:11px;letter-spacing:.25em;color:#b9a98f}.section-title{font-size:clamp(43px,10vw,64px);margin:0}.instruction{font-style:italic;color:#f1dba9}
+.scratch-row{display:flex;gap:10px;justify-content:center;max-width:620px;margin:28px auto 42px;flex-wrap:wrap}.scratch-card{position:relative;flex:1;min-width:110px;max-width:180px;height:145px;border:1px solid #d6b779;border-radius:17px;background:#34303a;display:grid;place-items:center;overflow:visible}.scratch-card strong{font-size:30px;font-weight:400;z-index:1}.scratch-card strong.month{font-size:21px}.scratch-card small{position:absolute;top:calc(100% + 12px);font-size:10px;letter-spacing:.3em;color:#c6b99f}.scratch-card canvas{position:absolute;inset:0;width:100%;height:100%;border-radius:16px;touch-action:none;z-index:2;cursor:crosshair}
+.invite-card{max-width:570px;margin:auto;padding:35px 22px;border:1px solid var(--gold2);outline:4px double #59472f;outline-offset:6px;background:radial-gradient(ellipse,#211b25,#09090e 75%)}
+.monogram{height:82px;width:82px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;margin:0 auto 20px;font:30px "Playfair Display",serif;color:var(--gold)}
+.blessing{font-style:italic;color:#d3c6b4}.couple-name{font-size:clamp(44px,10vw,66px);margin:8px 0}.family-label{font-size:10px;letter-spacing:.25em;color:#b9a98f}.family-name{letter-spacing:.12em;font-size:17px}.with{font-style:italic;color:var(--gold)}
+.story-copy{max-width:580px;margin:18px auto 40px;font-size:24px}.timeline{max-width:550px;margin:auto;text-align:left;border-left:1px solid var(--gold2);padding-left:25px}.timeline article{position:relative;margin:0 0 30px}.timeline article:before{content:"";position:absolute;left:-31px;top:9px;width:11px;height:11px;border:1px solid var(--gold);transform:rotate(45deg);background:var(--bg)}.timeline h3{font-size:34px;margin:0}.timeline p{margin:3px 0;color:#d1c5b6}
+.gallery-row{display:flex;gap:16px;overflow-x:auto;max-width:1000px;margin:24px auto 0;padding:10px 3px 20px;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}.photo{flex:0 0 min(78vw,310px);scroll-snap-align:center;margin:0}.photo img{width:100%;height:380px;object-fit:cover;border:6px solid #39313a;outline:1px solid var(--gold2);border-radius:100px 100px 4px 4px;background:#211b25}.photo figcaption{font-style:italic;color:#c8bba9;margin-top:8px}
+.event-list{max-width:760px;margin:30px auto 0}.event{display:grid;grid-template-columns:1fr 1fr;gap:18px;align-items:center;margin:32px 0;text-align:left}.event:nth-child(even) .event-art{order:2}.event:nth-child(even) .event-info{text-align:right}.event-art{height:190px;border:1px solid var(--gold2);border-radius:48% 48% 5px 5px;background:radial-gradient(ellipse,#59432d,#17121b 72%);display:grid;place-items:center;color:var(--gold);font-size:65px;box-shadow:inset 0 0 30px #d0a35a20}.event:nth-child(2) .event-art{background:radial-gradient(ellipse,#4b3451,#17121b 72%)}.event:nth-child(3) .event-art{background:radial-gradient(ellipse,#60422c,#17121b 72%)}.event:nth-child(4) .event-art{background:radial-gradient(ellipse,#3d3441,#17121b 72%)}
+.event-date{font-size:10px;letter-spacing:.2em;color:#c6b79e}.event-time{font:italic 29px "Great Vibes",cursive;color:var(--gold);margin:4px 0}.event h3{font-size:33px;font-weight:400;margin:0}.hindi{color:var(--gold);margin:0}.event-place{font-style:italic;color:#bdb1a1;margin:5px 0}
+.countdown{display:flex;justify-content:center;gap:clamp(12px,5vw,45px);margin:32px auto;flex-wrap:wrap}.countdown div{display:flex;flex-direction:column}.countdown strong{font:clamp(30px,8vw,54px) "Playfair Display",serif;color:var(--gold)}.countdown span{font-size:14px;color:#bdb1a1}
+
+/* Location Card Styles with Gwalior Palace Photo */
+.location-card {
+  max-width: 680px;
+  margin: 30px auto 0;
+  border: 1px solid var(--gold2);
+  border-radius: 16px;
+  overflow: hidden;
+  background: radial-gradient(ellipse, #211b25, #09090e 75%);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+}
+.location-image-wrap {
+  width: 100%;
+  height: 280px;
+  overflow: hidden;
+  position: relative;
+}
+.location-image-wrap img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+.location-details {
+  padding: 30px 20px;
+}
+.venue-city{font:36px "Playfair Display",serif;letter-spacing:.22em;margin:10px 0 0;color:var(--gold)}
+.venue-name{font-size:26px;margin:8px 0 4px}.map-link{display:inline-block;margin:22px 0 10px;color:var(--gold);font-size:12px;letter-spacing:.2em;text-decoration:none;border:1px solid var(--gold2);padding:10px 24px;border-radius:30px;transition:all 0.3s ease;background:rgba(223,189,121,0.08)}
+.map-link:hover{background:var(--gold);color:#100c13}
+
+.footer{text-align:center;padding:60px 18px;background:#09080d;border-top:1px solid #715532}.footer h2{font-size:58px;margin:0}.footer p{font-size:10px;letter-spacing:.2em;color:#b8a88e}
+
+/* Music Control Button */
+.music{position:fixed;right:18px;bottom:18px;z-index:10;width:50px;height:50px;border-radius:50%;border:1px solid var(--gold);background:linear-gradient(135deg, #dfbd79, #a98249);color:#100c13;font-size:20px;box-shadow:0 6px 20px rgba(0,0,0,0.6);cursor:pointer;display:grid;place-items:center;transition:all 0.3s ease}
+.music:hover{transform:scale(1.08)}
+
+@media(max-width:700px){
+  .event{grid-template-columns:1fr;text-align:center !important}
+  .event:nth-child(even) .event-art{order:0}
+  .event:nth-child(even) .event-info{text-align:center !important}
+}
+@media(min-width:700px){section.content{padding:95px 30px}.event-art{height:250px}.photo img{height:430px}.location-image-wrap{height:340px}}
+@media(max-width:430px){body{font-size:18px}.scratch-card{height:122px}.scratch-card strong{font-size:26px}.scratch-card strong.month{font-size:16px}.event{gap:12px}.event-art{height:155px}.event h3{font-size:28px}.event-time{font-size:25px}.event-date{font-size:9px}.photo img{height:340px}.location-image-wrap{height:220px}}
+</style>
+</head>
+<body class="locked" id="bodyTag">
+
+<!-- Language Toggle Button -->
+<button class="lang-toggle" id="langToggle">हिंदी</button>
+
+<button class="music" id="musicBtn" aria-label="Play or pause music" title="Music">♫</button>
+<audio id="music" loop preload="auto"><source src="assets/wedding-music.mp3" type="audio/mpeg"></audio>
+
+<!-- Palace First Screen -->
+<header class="hero" id="top" aria-label="Click the diya to illuminate the palace">
+  <!-- Image & Video Elements (If present in project directory) -->
+  <img class="scene-bg dark-image" id="palaceImg" src="palace-dark.jpg" alt="Unlit dark palace" onerror="this.style.display='none'">
+  <video class="scene-bg lighting-video" id="lightingVideo" src="palace-lighting.mp4" muted playsinline loop preload="auto" disablepictureinpicture onerror="this.style.display='none'"></video>
+  
+  
+  <div class="warmth"></div>
+
+  <!-- Animated Text Overlay over Arch/Palace Video -->
+  <div class="hero-text-overlay">
+    <div class="welcome-sub" data-en="Welcome to the wedding of" data-hi="शुभ विवाह निमंत्रण">Welcome to the wedding of</div>
+    <div class="couple-title">Aditi</div>
+    <div class="ampersand">&</div>
+    <div class="couple-title">Pankaj</div>
+    <div class="dec-divider">
+      <svg width="140" height="12" viewBox="0 0 120 12" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M0 6H45M75 6H120M60 0L66 6L60 12L54 6L60 0Z" stroke="#dfbd79" stroke-width="1.2"/>
+      </svg>
+    </div>
+    <div class="hero-date-loc" data-en="25 NOVEMBER 2026 • GWALIOR" data-hi="25 नवंबर 2026 • ग्वालियर">25 NOVEMBER 2026 • GWALIOR</div>
+  </div>
+  
+  <div class="tap-btn-container">
+    <button class="tap-button" id="lightButton" type="button" aria-label="Tap to light palace"><span class="diya-icon">🪔</span> <span data-en="Tap to Light Palace" data-hi="महल को रोशन करने के लिए टैप करें">Tap to Light Palace</span></button>
+  </div>
+  
+  <button class="replay" id="replayButton" type="button" data-en="Replay" data-hi="पुनः देखें">Replay</button>
+</header>
+
+<!-- Wedding Details Sections -->
+<section class="content" id="date">
+  <p class="kicker" data-en="A DATE TO REMEMBER" data-hi="एक यादगार तारीख">A DATE TO REMEMBER</p>
+  <h2 class="script section-title" data-en="The Date" data-hi="शुभ तिथि">The Date</h2>
+  <div class="ornament">❧ ✧ ❧</div>
+  <p class="instruction" data-en="✦ Scratch to reveal the date ✦" data-hi="✦ तारीख देखने के लिए स्क्रैच करें ✦">✦ Scratch to reveal the date ✦</p>
+  <div class="scratch-row">
+    <div class="scratch-card"><strong>25</strong><small data-en="DAY" data-hi="दिन">DAY</small><canvas aria-label="Scratch to reveal day"></canvas></div>
+    <div class="scratch-card"><strong class="month" data-en="November" data-hi="नवंबर">November</strong><small data-en="MONTH" data-hi="महीना">MONTH</small><canvas aria-label="Scratch to reveal month"></canvas></div>
+    <div class="scratch-card"><strong>2026</strong><small data-en="YEAR" data-hi="वर्ष">YEAR</small><canvas aria-label="Scratch to reveal year"></canvas></div>
+  </div>
+  <p style="font-size:24px;margin-top:42px" data-en="Wednesday · 25 November 2026" data-hi="बुधवार · 25 नवंबर 2026">Wednesday · 25 November 2026</p>
+  <p style="color:var(--muted);font-style:italic" data-en="A day made beautiful by your presence." data-hi="आपकी उपस्थिति इस दिन को सुंदर बनाएगी।">A day made beautiful by your presence.</p>
+</section>
+
+<section class="content" id="invitation">
+  <div class="invite-card">
+    <div class="monogram">P<span style="font-size:16px;color:var(--gold)">&</span>A</div>
+    <p class="devotional" style="color:var(--gold)">॥ श्री गणेशाय नमः ॥</p><div class="ornament">❧ ✧ ❧</div>
+    <p class="blessing" data-en="With the blessings of our elders,<br>you are invited to celebrate the wedding of" data-hi="बड़ों के आशीर्वाद से,<br>आप सहर्ष आमंत्रित हैं विवाह उत्सव में">With the blessings of our elders,<br>you are invited to celebrate the wedding of</p>
+    <h2 class="script couple-name">Pankaj Kumar</h2>
+    <p class="family-label" data-en="GROOM" data-hi="वर">GROOM</p>
+    <p class="with" data-en="with" data-hi="संग">with</p>
+    <h2 class="script couple-name">Aditi Prajapati</h2>
+    <p class="family-label" data-en="BRIDE" data-hi="वधू">BRIDE</p>
+    <div class="ornament">❧ ✧ ❧</div>
+    <p class="date-line" data-en="WEDNESDAY, 25 NOVEMBER 2026" data-hi="बुधवार, 25 नवंबर 2026">WEDNESDAY, 25 NOVEMBER 2026</p>
+    <p class="place-line" data-en="PIYUSH MARRIAGE GARDEN · GWALIOR" data-hi="पीयूष मैरिज गार्डन · ग्वालियर">PIYUSH MARRIAGE GARDEN · GWALIOR</p>
+  </div>
+</section>
+
+<section class="content" id="story">
+  <p class="kicker" data-en="A JOURNEY WRITTEN IN THE STARS" data-hi="सितारों में लिखी एक कहानी">A JOURNEY WRITTEN IN THE STARS</p>
+  <h2 class="script section-title" data-en="Our Story" data-hi="हमारी कहानी">Our Story</h2>
+  <div class="ornament">❧ ✧ ❧</div>
+  <p class="story-copy" data-en="Two families, two journeys, and one beautiful beginning. We are excited to start this new chapter and would love to have you with us." data-hi="दो परिवार, दो सफर और एक खूबसूरत शुरुआत। हम इस नए अध्याय की शुरुआत को लेकर बहुत उत्साहित हैं।">Two families, two journeys, and one beautiful beginning. We are excited to start this new chapter and would love to have you with us.</p>
+  <div class="timeline">
+    <article>
+      <h3 class="script" data-en="The beginning" data-hi="शुरुआत">The beginning</h3>
+      <p data-en="Two paths crossed, bringing two families closer." data-hi="दो रास्ते मिले और दो परिवारों को करीब लाए।">Two paths crossed, bringing two families closer.</p>
+    </article>
+    <article>
+      <h3 class="script" data-en="A promise" data-hi="एक वादा">A promise</h3>
+      <p data-en="A promise of togetherness, sealed with blessings and love." data-hi="साथ निभाने का वादा, प्यार और आशीर्वाद के साथ।">A promise of togetherness, sealed with blessings and love.</p>
+    </article>
+    <article>
+      <h3 class="script" data-en="Forever starts here" data-hi="सदा के लिए शुरुआत">Forever starts here</h3>
+      <p data-en="Now, we celebrate the beginning of our forever." data-hi="अब, हम अपने जीवन भर के सफर का जश्न मना रहे हैं।">Now, we celebrate the beginning of our forever.</p>
+    </article>
+  </div>
+</section>
+
+<section class="content" id="gallery">
+  <p class="kicker" data-en="LITTLE MOMENTS, BIG MEMORIES" data-hi="छोटे पल, बड़ी यादें">LITTLE MOMENTS, BIG MEMORIES</p>
+  <h2 class="script section-title" data-en="Us, so far" data-hi="हमारी झलकियां">Us, so far</h2>
+  <div class="ornament">❧ ✧ ❧</div>
+  <div class="gallery-row">
+    <figure class="photo"><img src="assets/couple-1.jpg" alt="Pankaj and Aditi photo 1" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23211b25'/><text x='50%' y='50%' fill='%23dfbd79' font-family='Georgia' font-size='20' text-anchor='middle'>Couple Moment 1</text></svg>'"><figcaption data-en="Our favourite moment" data-hi="हमारा पसंदीदा पल">Our favourite moment</figcaption></figure>
+    <figure class="photo"><img src="assets/couple-2.jpg" alt="Pankaj and Aditi photo 2" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23211b25'/><text x='50%' y='50%' fill='%23dfbd79' font-family='Georgia' font-size='20' text-anchor='middle'>Couple Moment 2</text></svg>'"><figcaption data-en="A memory to cherish" data-hi="संजोने योग्य यादें">A memory to cherish</figcaption></figure>
+    <figure class="photo"><img src="assets/couple-3.jpg" alt="Pankaj and Aditi photo 3" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='300' height='400' viewBox='0 0 300 400'><rect width='100%' height='100%' fill='%23211b25'/><text x='50%' y='50%' fill='%23dfbd79' font-family='Georgia' font-size='20' text-anchor='middle'>Couple Moment 3</text></svg>'"><figcaption data-en="Just the beginning" data-hi="बस एक शुरुआत">Just the beginning</figcaption></figure>
+  </div>
+  <p class="kicker" style="margin-top:16px" data-en="SWIPE TO SEE MORE" data-hi="और देखने के लिए स्वाइप करें">SWIPE TO SEE MORE</p>
+</section>
+
+<section class="content" id="events">
+  <p class="kicker" data-en="JOIN US FOR THE CELEBRATIONS" data-hi="उत्सव का हिस्सा बनें">JOIN US FOR THE CELEBRATIONS</p>
+  <h2 class="script section-title" data-en="The Celebrations" data-hi="कार्यक्रम एवं उत्सव">The Celebrations</h2>
+  <div class="ornament">❧ ✧ ❧</div>
+  <div class="event-list">
+    <article class="event">
+      <div class="event-art"><img src="assets/Haldi.jpg" alt="Haldi" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div></div>
+      <div class="event-info">
+        <p class="event-date" data-en="TUESDAY · 24 NOVEMBER" data-hi="मंगलवार · 24 नवंबर">TUESDAY · 24 NOVEMBER</p>
+        <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time to be announced</p>
+        <h3 data-en="Haldi" data-hi="हल्दी रसायन">Haldi</h3>
+        <p class="hindi">हल्दी</p>
+        <p class="event-place" data-en="Piyush Marriage Garden" data-hi="पीयूष मैरिज गार्डन">Piyush Marriage Garden</p>
+      </div>
+    </article>
+    <article class="event">
+      <div class="event-art"><img src="assets/Mehndi.jpg" alt="Haldi" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
+      <div class="event-info">
+        <p class="event-date" data-en="TUESDAY · 24 NOVEMBER" data-hi="मंगलवार · 24 नवंबर">TUESDAY · 24 NOVEMBER</p>
+        <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time to be announced</p>
+        <h3 data-en="Mehndi" data-hi="मेहंदी उत्सव">Mehndi</h3>
+        <p class="hindi">मेहंदी</p>
+        <p class="event-place" data-en="Piyush Marriage Garden" data-hi="पीयूष मैरिज गार्डन">Piyush Marriage Garden</p>
+      </div>
+    </article>
+    <article class="event">
+      <div class="event-art"><img src="assets/Wedding.jpg" alt="Haldi" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
+      <div class="event-info">
+        <p class="event-date" data-en="WEDNESDAY · 25 NOVEMBER" data-hi="बुधवार · 25 नवंबर">WEDNESDAY · 25 NOVEMBER</p>
+        <p class="event-time" data-en="Pheras Muhurat · 5:00 AM" data-hi="फेरे शुभ मुहूर्त · प्रात: 5:00 बजे">Pheras Muhurat · 5:00 AM</p>
+        <h3 data-en="Wedding" data-hi="शुभ विवाह">Wedding</h3>
+        <p class="hindi">विवाह</p>
+        <p class="event-place" data-en="Piyush Marriage Garden, Gwalior" data-hi="पीयूष मैरिज गार्डन, ग्वालियर">Piyush Marriage Garden, Gwalior</p>
+      </div>
+    </article>
+    <article class="event">
+      <div class="event-art"><img src="assets/Vidaai.jpg" alt="Haldi" style="width:100%; height:100%; object-fit:cover; border-radius:50%;"></div>
+      <div class="event-info">
+        <p class="event-date" data-en="THURSDAY · 26 NOVEMBER" data-hi="गुरुवार · 26 नवंबर">THURSDAY · 26 NOVEMBER</p>
+        <p class="event-time" data-en="Time to be announced" data-hi="समय शीघ्र घोषित होगा">Time to be announced</p>
+        <h3 data-en="Vidaai" data-hi="शुभ विदाई">Vidaai</h3>
+        <p class="hindi">विदाई</p>
+        <p class="event-place" data-en="With love and blessings" data-hi="स्नेह और आशीर्वाद के साथ">With love and blessings</p>
+      </div>
+    </article>
+  </div>
+</section>
+
+<section class="content">
+  <p class="kicker" data-en="THE COUNTDOWN BEGINS" data-hi="शुभ घड़ी की उल्टी गिनती">THE COUNTDOWN BEGINS</p>
+  <h2 class="script section-title" data-en="Until we say “I do”" data-hi="विवाह के शुभ मुहूर्त तक" >Until we say “I do”</h2>
+  <div class="ornament">❧ ✧ ❧</div>
+  <div class="countdown">
+    <div><strong id="days">00</strong><span data-en="Days" data-hi="दिन">Days</span></div>
+    <div><strong id="hours">00</strong><span data-en="Hours" data-hi="घंटे">Hours</span></div>
+    <div><strong id="minutes">00</strong><span data-en="Minutes" data-hi="मिनट">Minutes</span></div>
+    <div><strong id="seconds">00</strong><span data-en="Seconds" data-hi="सेकंड">Seconds</span></div>
+  </div>
+  <p style="font-style:italic;color:var(--muted)" data-en="until the wedding pheras" data-hi="शुभ फेरों के समय तक">until the wedding pheras</p>
+</section>
+
+<!-- Location Section with Gwalior Palace Photo -->
+<section class="content" id="location">
+  <p class="kicker" data-en="WE WOULD LOVE TO SEE YOU" data-hi="स्थान की जानकारी">WE WOULD LOVE TO SEE YOU</p>
+  <h2 class="script section-title" data-en="The Location" data-hi="विवाह स्थल">The Location</h2>
+  <div class="ornament">❧ ✧ ❧</div>
+  <div class="location-card">
+    <div class="location-image-wrap">
+      <img src="assets/gwalior-palace.jpg" alt="Gwalior Palace Night View" onerror="this.onerror=null;this.src='data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300' viewBox='0 0 600 300'><rect width='100%' height='100%' fill='%2317121b'/><text x='50%' y='50%' fill='%23dfbd79' font-family='Georgia' font-size='22' text-anchor='middle'>Piyush Marriage Garden, Gwalior</text></svg>'">
+    </div>
+    <div class="location-details">
+      <h3 class="venue-city" data-en="GWALIOR" data-hi="ग्वालियर">GWALIOR</h3>
+      <p class="venue-name" data-en="Piyush Marriage Garden" data-hi="पीयूष मैरिज गार्डन">Piyush Marriage Garden</p>
+      <p style="color:var(--muted);margin:4px 0 0" data-en="Gwalior, Madhya Pradesh, India" data-hi="ग्वालियर, मध्य प्रदेश, भारत">Gwalior, Madhya Pradesh, India</p>
+      <a class="map-link" href="https://www.google.com/maps/search/?api=1&query=Piyush+Marriage+Garden+Gwalior" target="_blank" rel="noopener" data-en="OPEN IN GOOGLE MAPS ↗" data-hi="गूगल मैप्स में खोलें ↗">OPEN IN GOOGLE MAPS ↗</a>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <p style="color:var(--gold)">॥ श्री गणेशाय नमः ॥</p>
+  <h2 class="script">Pankaj & Aditi</h2>
+  <p data-en="MADE WITH LOVE · 25 NOVEMBER 2026" data-hi="प्रेमपूर्वक निर्मित · 25 नवंबर 2026">MADE WITH LOVE · 25 NOVEMBER 2026</p>
+  <a href="#top" style="color:var(--gold);font-size:11px;letter-spacing:.2em;text-decoration:none" data-en="BACK TO TOP ↑" data-hi="वापस ऊपर जाएँ ↑">BACK TO TOP ↑</a>
+</footer>
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const $ = id => document.getElementById(id);
+  const bodyTag = $('bodyTag');
+  const hero = $('top');
+  const video = $('lightingVideo');
+  const lightButton = $('lightButton');
+  const replayButton = $('replayButton');
+  const audio = $('music');
+  const musicBtn = $('musicBtn');
+  const langToggle = $('langToggle');
+
+  let currentLang = 'en';
+
+  // Language Translation Switcher
+  langToggle.addEventListener('click', () => {
+    currentLang = currentLang === 'en' ? 'hi' : 'en';
+    langToggle.textContent = currentLang === 'en' ? 'हिंदी' : 'English';
+
+    document.querySelectorAll('[data-en]').forEach(el => {
+      const text = el.getAttribute(`data-${currentLang}`);
+      if (text) {
+        if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+          el.value = text;
+        } else {
+          el.innerHTML = text;
+        }
+      }
+    });
+  });
+
+  async function lightPalace() {
+    if (hero.classList.contains('lit')) return;
+    hero.classList.add('lit');
+    bodyTag.classList.remove('locked');
+
+    if (video && video.style.display !== 'none') {
+      try {
+        video.currentTime = 0;
+        await video.play();
+      } catch (error) {
+        console.warn('Video play note:', error);
+      }
+    }
+
+    try {
+      await audio.play();
+      musicBtn.textContent = 'Ⅱ';
+    } catch (e) {
+      console.warn('Audio autoplay restricted:', e);
+    }
+
+    // Auto-scroll after lighting transition and text animation complete (~5.5 seconds)
+    setTimeout(() => {
+      $('date').scrollIntoView({ behavior: 'smooth' });
+    }, 5500);
+  }
+
+  function replayAnimation(event) {
+    if(event) event.stopPropagation();
+    hero.classList.remove('lit');
+    bodyTag.classList.add('locked');
+    if (video && video.pause) {
+      video.pause();
+      video.currentTime = 0;
+    }
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  lightButton.addEventListener('click', lightPalace);
+  replayButton.addEventListener('click', replayAnimation);
+
+  musicBtn.addEventListener('click', async () => {
+    if (audio.paused) {
+      try { await audio.play(); musicBtn.textContent = 'Ⅱ'; }
+      catch (e) { alert('Add your music file at assets/wedding-music.mp3 first.'); }
+    } else { 
+      audio.pause(); 
+      musicBtn.textContent = '♫'; 
+    }
+  });
+
+  audio.addEventListener('play', () => musicBtn.textContent = 'Ⅱ');
+  audio.addEventListener('pause', () => musicBtn.textContent = '♫');
+
+  // Scratch cards implementation
+  document.querySelectorAll('.scratch-card').forEach(card => {
+    const canvas = card.querySelector('canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    let drawing = false, revealed = false, lastCheck = 0;
+
+    function paintCover() {
+      const rect = card.getBoundingClientRect();
+      const dpr = Math.max(1, window.devicePixelRatio || 1);
+      canvas.width = Math.round(rect.width * dpr);
+      canvas.height = Math.round(rect.height * dpr);
+      ctx.setTransform(dpr,0,0,dpr,0,0);
+      const g = ctx.createLinearGradient(0,0,rect.width,rect.height);
+      g.addColorStop(0,'#f0dda9'); g.addColorStop(.48,'#c49e60'); g.addColorStop(1,'#ead39a');
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.fillStyle = g; ctx.fillRect(0,0,rect.width,rect.height);
+      ctx.strokeStyle = 'rgba(255,255,255,.7)'; ctx.lineWidth = 2;
+      ctx.strokeRect(8,8,rect.width-16,rect.height-16);
+      ctx.fillStyle = 'rgba(255,255,255,.75)'; ctx.font = '22px Georgia'; ctx.textAlign='center';
+      ctx.fillText('✦',rect.width/2,rect.height/2+8);
+    }
+
+    function erase(e) {
+      if (!drawing || revealed) return;
+      const rect = canvas.getBoundingClientRect();
+      const point = e.touches ? e.touches[0] : e;
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath(); 
+      ctx.arc(point.clientX - rect.left, point.clientY - rect.top, 19, 0, Math.PI * 2); 
+      ctx.fill();
+      
+      const now = Date.now();
+      if (now - lastCheck > 180) {
+        lastCheck = now;
+        try {
+          const pixels = ctx.getImageData(0, 0, canvas.width, canvas.height).data;
+          let clear = 0;
+          for (let i = 3; i < pixels.length; i += 4) if (pixels[i] < 20) clear++;
+          if (clear / (pixels.length / 4) > .42) {
+            revealed = true; 
+            canvas.style.transition = 'opacity .35s'; 
+            canvas.style.opacity = '0';
+            setTimeout(() => canvas.remove(), 380);
+          }
+        } catch (_) {}
+      }
+    }
+
+    canvas.addEventListener('pointerdown', e => { drawing = true; canvas.setPointerCapture(e.pointerId); erase(e); });
+    canvas.addEventListener('pointermove', erase);
+    ['pointerup', 'pointercancel', 'pointerleave'].forEach(type => canvas.addEventListener(type, () => drawing = false));
+    
+    window.addEventListener('resize', paintCover);
+    paintCover();
+  });
+
+  // Countdown timer
+  function tick() {
+    const target = new Date(2026, 10, 25, 5, 0, 0).getTime();
+    let diff = Math.max(0, target - Date.now());
+    const d = Math.floor(diff / 86400000); diff %= 86400000;
+    const h = Math.floor(diff / 3600000); diff %= 3600000;
+    const m = Math.floor(diff / 60000); diff %= 60000;
+    const s = Math.floor(diff / 1000);
+    
+    if($('days')) $('days').textContent = String(d).padStart(2,'0');
+    if($('hours')) $('hours').textContent = String(h).padStart(2,'0');
+    if($('minutes')) $('minutes').textContent = String(m).padStart(2,'0');
+    if($('seconds')) $('seconds').textContent = String(s).padStart(2,'0');
+  }
+  tick(); 
+  window.setInterval(tick, 1000);
+});
+</script>
+</body>
+</html>
