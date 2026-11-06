@@ -1136,6 +1136,56 @@ article.event .event-date {
   pointer-events: none;
   z-index: 99999;
 }
+  /* Floating Pull Button & Text Animation */
+.pull-btn-img {
+  width: 90px;
+  height: 90px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 25px rgba(223, 189, 121, 0.6);
+  border: 2px solid var(--gold);
+  animation: floatingIcon 2s infinite ease-in-out;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+.pull-text-anim {
+  font-family: 'Playfair Display', serif;
+  color: var(--gold);
+  font-size: 18px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  animation: floatingIcon 2s infinite ease-in-out;
+  animation-delay: 0.2s;
+}
+
+@keyframes floatingIcon {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
+}
+
+.pull-cover {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, #2b1f33, #100c13);
+  border: 2px solid var(--gold);
+  border-radius: 16px;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1), opacity 0.8s ease;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+  min-height: 140px;
+}
+
+.pull-cover.revealed {
+  transform: translateY(105%);
+  opacity: 0;
+  pointer-events: none;
+}
   
 </style>
 </head>
@@ -1401,13 +1451,11 @@ article.event .event-date {
 
   <div class="countdown-wrapper-relative" style="max-width: 600px; margin: 0 auto;">
     
-    <!-- PULL DOWN SURPRISE COVER -->
-    <div id="pullCover" class="pull-cover" onclick="revealCountdownWithPopper()">
-      <span style="color: var(--gold); font-family: 'Playfair Display', serif; font-size: 18px; letter-spacing: 0.1em;">
-        ✨ Pull / Tap To Reveal Surprise ✨
-      </span>
-      <div class="pull-handle"></div>
-    </div>
+   <!-- Pull-Down Cover with Floating Button & Text -->
+<div id="pullCover" class="pull-cover" onclick="revealCountdownWithPopper()">
+  <img src="assets/pullbutton.jpg" alt="Pull Button" class="pull-btn-img"[cite: 7]>
+  <div class="pull-text-anim">Pull Down To Reveal ✨</div>
+</div>
 
     <!-- REVEALED COUNTDOWN GRID -->
     <div class="countdown-grid">
@@ -1804,18 +1852,19 @@ function firePopper() {
   canvas.height = window.innerHeight;
 
   const particles = [];
-  const colors = ['#dfbd79', '#a98249', '#ffffff', '#ff4081', '#ffd700'];
+  const colors = ['#dfbd79', '#a98249', '#ffffff', '#ff4081', '#ffd700', '#ffeb3b', '#e91e63'];
 
-  for (let i = 0; i < 120; i++) {
+  // Bude aur jyada quantity mein poppers poori screen ke liye
+  for (let i = 0; i < 250; i++) {
     particles.push({
       x: canvas.width / 2,
       y: canvas.height / 2,
-      vx: (Math.random() - 0.5) * 18,
-      vy: (Math.random() - 0.7) * 18,
-      size: Math.random() * 8 + 4,
+      vx: (Math.random() - 0.5) * 28,
+      vy: (Math.random() - 0.7) * 28,
+      size: Math.random() * 14 + 6, // Bde size ke particles
       color: colors[Math.floor(Math.random() * colors.length)],
       rotation: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 10,
+      rotSpeed: (Math.random() - 0.5) * 12,
       opacity: 1
     });
   }
@@ -1829,8 +1878,8 @@ function firePopper() {
         activeParticles++;
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.3;
-        p.opacity -= 0.012;
+        p.vy += 0.4; // gravity
+        p.opacity -= 0.008; // dheere dheere fade honge
         p.rotation += p.rotSpeed;
 
         ctx.save();
@@ -1852,8 +1901,7 @@ function firePopper() {
 
   animate();
 }
-
-function revealCountdownWithPopper() {
+  function revealCountdownWithPopper() {
   const cover = document.getElementById('pullCover');
   if (cover && !cover.classList.contains('revealed')) {
     cover.classList.add('revealed');
