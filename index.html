@@ -1167,7 +1167,10 @@ article.event .event-date {
 .pull-cover {
   position: absolute;
   inset: 0;
-  background: linear-gradient(135deg, #2b1f33, #100c13);
+  /* Yahan aapki di gayi background image set ki gayi hai */
+  background-image: url('assets/pulldownbackground.jpg')[cite: 8];
+  background-size: cover;
+  background-position: center;
   border: 2px solid var(--gold);
   border-radius: 16px;
   z-index: 50;
@@ -1832,20 +1835,7 @@ function escapeHtml(text) {
 
     const flipBookElem = document.getElementById('royalFlipBook');
     if (flipBookElem) {
-      flipBookElem.addEventListener('touchstart', e => {
-        touchStartXPos = e.changedTouches[0].screenX;
-      }, {passive: true});
-
-      flipBookElem.addEventListener('touchend', e => {
-        touchEndXPos = e.changedTouches[0].screenX;
-        if (touchStartXPos - touchEndXPos > 40) {
-          flipPage(1); // Swipe Left -> Next
-        } else if (touchEndXPos - touchStartXPos > 40) {
-          flipPage(-1); // Swipe Right -> Previous
-        }
-      }, {passive: true});
-    }
-function firePopper() {
+      function firePopper() {
   const canvas = document.getElementById('confettiCanvas');
   const ctx = canvas.getContext('2d');
   canvas.width = window.innerWidth;
@@ -1854,17 +1844,16 @@ function firePopper() {
   const particles = [];
   const colors = ['#dfbd79', '#a98249', '#ffffff', '#ff4081', '#ffd700', '#ffeb3b', '#e91e63'];
 
-  // Bude aur jyada quantity mein poppers poori screen ke liye
   for (let i = 0; i < 250; i++) {
     particles.push({
       x: canvas.width / 2,
       y: canvas.height / 2,
-      vx: (Math.random() - 0.5) * 28,
-      vy: (Math.random() - 0.7) * 28,
-      size: Math.random() * 14 + 6, // Bde size ke particles
+      vx: (Math.random() - 0.5) * 15,  // Yahan 28 se ghata kar 15 kiya (Slow burst)
+      vy: (Math.random() - 0.7) * 15,  // Yahan bhi 28 se ghata kar 15 kiya
+      size: Math.random() * 14 + 6,
       color: colors[Math.floor(Math.random() * colors.length)],
       rotation: Math.random() * 360,
-      rotSpeed: (Math.random() - 0.5) * 12,
+      rotSpeed: (Math.random() - 0.5) * 8,
       opacity: 1
     });
   }
@@ -1878,8 +1867,8 @@ function firePopper() {
         activeParticles++;
         p.x += p.vx;
         p.y += p.vy;
-        p.vy += 0.4; // gravity
-        p.opacity -= 0.008; // dheere dheere fade honge
+        p.vy += 0.18;   // Gravity ko 0.4 se kam karke 0.18 kiya (Slow fall)
+        p.opacity -= 0.004; // Fade speed ko aadha kiya taaki der tak dikhein
         p.rotation += p.rotSpeed;
 
         ctx.save();
@@ -1901,6 +1890,20 @@ function firePopper() {
 
   animate();
 }
+      flipBookElem.addEventListener('touchstart', e => {
+        touchStartXPos = e.changedTouches[0].screenX;
+      }, {passive: true});
+
+      flipBookElem.addEventListener('touchend', e => {
+        touchEndXPos = e.changedTouches[0].screenX;
+        if (touchStartXPos - touchEndXPos > 40) {
+          flipPage(1); // Swipe Left -> Next
+        } else if (touchEndXPos - touchStartXPos > 40) {
+          flipPage(-1); // Swipe Right -> Previous
+        }
+      }, {passive: true});
+    }
+
   function revealCountdownWithPopper() {
   const cover = document.getElementById('pullCover');
   if (cover && !cover.classList.contains('revealed')) {
